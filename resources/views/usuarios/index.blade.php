@@ -11,7 +11,7 @@
                   <div class="card">
                       <div class="card-body">                           
                           <a class="btn btn-warning" href="{{ route('usuarios.create') }}">Nuevo</a>        
-                         
+                          <a class="btn btn-warning" href="">Nuevo PDF</a>
                             <table class="table table-striped mt-2">
                               <thead style="background-color:#6777ef">                                     
                                   <th style="display: none;">ID</th>
