@@ -29,7 +29,7 @@ class RolController extends Controller
          //Con paginación
          $roles = Role::paginate(5);
          return view('roles.index',compact('roles'));
-         //al usar esta paginacion, recordar poner en el el index.blade.php este codigo  {!! $roles->links() !!} 
+         //al usar esta paginacion, recordar poner en el index.blade.php este codigo  {!! $roles->links() !!} 
     }
 
     /**
