@@ -9,6 +9,6 @@
         <i class=" fas fa-user-lock"></i><span>Roles</span>
     </a>
     <a class="nav-link" href="/blogs">
-        <i class=" fas fa-blog"></i><span>Temas</span>
+        <i class=" fas fa-book"></i><span>Temas</span>
     </a>
 </li>
