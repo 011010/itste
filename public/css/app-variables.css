@@ -1,0 +1,52 @@
+/**
+ * Variables de Tema para ITSTE
+ * Centraliza los colores y configuraciones visuales del proyecto
+ */
+
+:root {
+    /* Colores Primarios */
+    --primary-color: #6777ef;
+    --primary-dark: #4f5fd6;
+    --primary-light: #8694f0;
+
+    /* Colores de Estado */
+    --danger-color: #fc544b;
+    --success-color: #6777ef;
+    --warning-color: #ffa426;
+    --info-color: #3abaf4;
+
+    /* Colores de Texto */
+    --text-white: #fff;
+    --text-dark: #34395e;
+    --text-muted: #6c757d;
+
+    /* Colores de Fondo */
+    --bg-light: #f8f9fa;
+    --bg-dark: #34395e;
+
+    /* SweetAlert */
+    --sweetalert-confirm-color: #6777ef;
+    --sweetalert-cancel-color: #d33;
+}
+
+/* Clases de utilidad para colores de tabla */
+.table-primary-header {
+    background-color: var(--primary-color) !important;
+    color: var(--text-white) !important;
+}
+
+.table-primary-header th {
+    color: var(--text-white) !important;
+}
+
+/* Clases para botones con colores personalizados */
+.btn-primary-custom {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-white);
+}
+
+.btn-primary-custom:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}

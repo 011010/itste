@@ -17,13 +17,19 @@ class SeederTablaPermisos extends Seeder
     public function run()
     {
         $permisos = [
+            //Operaciones sobre tabla usuarios
+            'ver-usuario',
+            'crear-usuario',
+            'editar-usuario',
+            'borrar-usuario',
+
             //Operaciones sobre tabla roles
             'ver-rol',
             'crear-rol',
             'editar-rol',
             'borrar-rol',
 
-            //Operacions sobre tabla temas
+            //Operaciones sobre tabla temas
             'ver-tema',
             'crear-tema',
             'editar-tema',

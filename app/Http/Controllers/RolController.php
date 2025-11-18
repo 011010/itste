@@ -3,21 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-//agregamos
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
-
+use App\Http\Traits\HasPermissionMiddleware;
 
 class RolController extends Controller
 {
+    use HasPermissionMiddleware;
+
     function __construct()
     {
-         $this->middleware('permission:ver-rol|crear-rol|editar-rol|borrar-rol', ['only' => ['index']]);
-         $this->middleware('permission:crear-rol', ['only' => ['create','store']]);
-         $this->middleware('permission:editar-rol', ['only' => ['edit','update']]);
-         $this->middleware('permission:borrar-rol', ['only' => ['destroy']]);
+         $this->applyPermissionMiddleware('rol');
     }
     /**
      * Display a listing of the resource.
@@ -25,11 +22,9 @@ class RolController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {        
-         //Con paginación
-         $roles = Role::paginate(5);
-         return view('roles.index',compact('roles'));
-         //al usar esta paginacion, recordar poner en el index.blade.php este codigo  {!! $roles->links() !!} 
+    {
+         $roles = Role::paginate(config('app_settings.pagination.per_page', 10));
+         return view('roles.index', compact('roles'));
     }
 
     /**
