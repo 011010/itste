@@ -66,6 +66,12 @@ window.displayErrorMessage = function (message) {
     });
 };
 
+// Colores de SweetAlert centralizados
+window.sweetAlertColors = {
+    confirm: '#6777ef',
+    cancel: '#d33'
+};
+
 window.deleteItem = function (url, tableId, header, callFunction = null) {
     swal({
             title: 'Delete !',
@@ -74,8 +80,8 @@ window.deleteItem = function (url, tableId, header, callFunction = null) {
             showCancelButton: true,
             closeOnConfirm: false,
             showLoaderOnConfirm: true,
-            confirmButtonColor: '#6777ef',
-            cancelButtonColor: '#d33',
+            confirmButtonColor: window.sweetAlertColors.confirm,
+            cancelButtonColor: window.sweetAlertColors.cancel,
             cancelButtonText: 'No',
             confirmButtonText: 'Yes',
         },
@@ -101,7 +107,7 @@ function deleteItemAjax (url, tableId, header, callFunction = null) {
                 title: 'Deleted!',
                 text: header + ' has been deleted.',
                 type: 'success',
-                confirmButtonColor: '#6777ef',
+                confirmButtonColor: window.sweetAlertColors.confirm,
                 timer: 2000,
             });
             if (callFunction) {
@@ -113,7 +119,7 @@ function deleteItemAjax (url, tableId, header, callFunction = null) {
                 title: '',
                 text: data.responseJSON.message,
                 type: 'error',
-                confirmButtonColor: '#6777ef',
+                confirmButtonColor: window.sweetAlertColors.confirm,
                 timer: 5000,
             });
         },
@@ -141,13 +147,16 @@ window.prepareTemplateRender = function (templateSelector, data) {
     return template.render(data);
 };
 
+// Configuración de extensiones permitidas (centralizado)
+window.allowedImageExtensions = ['gif', 'png', 'jpg', 'jpeg', 'webp'];
+
 window.isValidFile = function (inputSelector, validationMessageSelector) {
     let ext = $(inputSelector).val().split('.').pop().toLowerCase();
-    if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+    if ($.inArray(ext, window.allowedImageExtensions) == -1) {
         $(inputSelector).val('');
         $(validationMessageSelector).removeClass('d-none');
         $(validationMessageSelector).
-            html('The image must be a file of type: jpeg, jpg, png.').
+            html('The image must be a file of type: ' + window.allowedImageExtensions.join(', ') + '.').
             show();
         return false;
     }
@@ -256,7 +265,7 @@ $('.languageSelection').on('click', function () {
 
     $.ajax({
         type: 'POST',
-        url: '/change-language',
+        url: '/change-language', // TODO: Usar route helper cuando esté disponible
         data: { languageName: languageName },
         success: function () {
             location.reload();

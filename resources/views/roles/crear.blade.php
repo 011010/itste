@@ -10,18 +10,8 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                        
-                        @if ($errors->any())                                                
-                            <div class="alert alert-dark alert-dismissible fade show" role="alert">
-                            <strong>¡Revise los campos!</strong>                        
-                                @foreach ($errors->all() as $error)                                    
-                                    <span class="badge badge-danger">{{ $error }}</span>
-                                @endforeach                        
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-                        @endif
+
+                        <x-validation-errors />
 
 
                         {!! Form::open(array('route' => 'roles.store','method'=>'POST')) !!}

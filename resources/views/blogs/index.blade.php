@@ -12,7 +12,7 @@
                         <div class="card-body">
                 
             
-                        @can('crear-blog')
+                        @can('crear-tema')
                         <a class="btn btn-warning" href="{{ route('blogs.create') }}">Nuevo</a>
                         @endcan
             
@@ -31,13 +31,13 @@
                                 <td>{{ $blog->contenido }}</td>
                                 <td>
                                     <form action="{{ route('blogs.destroy',$blog->id) }}" method="POST">                                        
-                                        @can('editar-blog')
+                                        @can('editar-tema')
                                         <a class="btn btn-info" href="{{ route('blogs.edit',$blog->id) }}">Editar</a>
                                         @endcan
 
                                         @csrf
                                         @method('DELETE')
-                                        @can('borrar-blog')
+                                        @can('borrar-tema')
                                         <button type="submit" class="btn btn-danger">Borrar</button>
                                         @endcan
                                     </form>

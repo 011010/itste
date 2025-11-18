@@ -18,6 +18,8 @@
 <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('web/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('web/css/components.css')}}">
+    <!-- Custom Variables CSS -->
+    <link rel="stylesheet" href="{{ asset('css/app-variables.css') }}">
     @yield('page_css')
 
 

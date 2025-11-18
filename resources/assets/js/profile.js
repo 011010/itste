@@ -7,35 +7,18 @@ $(document).on('click', '.edit-profile', function (event) {
 
 $(document).on('change', '#pfImage', function () {
     let ext = $(this).val().split('.').pop().toLowerCase();
-    if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+    // Usar extensiones permitidas globales definidas en custom.js
+    if ($.inArray(ext, window.allowedImageExtensions || ['gif', 'png', 'jpg', 'jpeg']) == -1) {
         $(this).val('');
         $('#editProfileValidationErrorsBox').
             html(
-                'The profile image must be a file of type: jpeg, jpg, png.').
+                'The profile image must be a file of type: ' + (window.allowedImageExtensions || ['gif', 'png', 'jpg', 'jpeg']).join(', ') + '.').
             show();
     } else {
+        // La función displayPhoto está definida en custom.js
         displayPhoto(this, '#edit_preview_photo');
     }
 });
-
-window.displayPhoto = function (input, selector) {
-    let displayPreview = true
-    if (input.files && input.files[0]) {
-        let reader = new FileReader()
-        reader.onload = function (e) {
-            let image = new Image()
-            image.src = e.target.result
-            image.onload = function () {
-                $(selector).attr('src', e.target.result)
-                displayPreview = true
-            }
-        }
-        if (displayPreview) {
-            reader.readAsDataURL(input.files[0])
-            $(selector).show()
-        }
-    }
-}
 
 $(document).on('submit', '#editProfileForm', function (event) {
     event.preventDefault();

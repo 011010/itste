@@ -3,33 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-//agregamos lo siguiente
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
+use App\Http\Traits\HasPermissionMiddleware;
 
 class UsuarioController extends Controller
 {
+    use HasPermissionMiddleware;
+
+    function __construct()
+    {
+         $this->applyPermissionMiddleware('usuario');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {      
-        //Sin paginación
-        /* $usuarios = User::all();
-        return view('usuarios.index',compact('usuarios')); */
-
-        //Con paginación
-        $usuarios = User::paginate(5);
-        return view('usuarios.index',compact('usuarios'));
-
-        //al usar esta paginacion, recordar poner en el el index.blade.php este codigo  {!! $usuarios->links() !!}
+    {
+        $usuarios = User::paginate(config('app_settings.pagination.per_page', 10));
+        return view('usuarios.index', compact('usuarios'));
     }
 
     /**
@@ -120,7 +118,8 @@ class UsuarioController extends Controller
     
         $user = User::find($id);
         $user->update($input);
-        DB::table('model_has_roles')->where('model_id',$id)->delete();
+        // Remover roles existentes antes de reasignar
+        $user->roles()->detach();
     
         $user->assignRole($request->input('roles'));
     

@@ -3,17 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\Blog;
+use App\Http\Traits\HasPermissionMiddleware;
 
 class BlogController extends Controller
 {
+    use HasPermissionMiddleware;
+
     function __construct()
     {
-         $this->middleware('permission:ver-blog|crear-blog|editar-blog|borrar-blog')->only('index');
-         $this->middleware('permission:crear-tema', ['only' => ['create','store']]);
-         $this->middleware('permission:editar-tema', ['only' => ['edit','update']]);
-         $this->middleware('permission:borrar-tema', ['only' => ['destroy']]);
+         $this->applyPermissionMiddleware('tema');
     }
     /**
      * Display a listing of the resource.
@@ -21,11 +20,9 @@ class BlogController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {       
-         //Con paginación
-         $blogs = Blog::paginate(5);
-         return view('blogs.index',compact('blogs'));
-         //al usar esta paginacion, recordar poner en el el index.blade.php este codigo  {!! $blogs->links() !!}    
+    {
+         $blogs = Blog::paginate(config('app_settings.pagination.per_page', 10));
+         return view('blogs.index', compact('blogs'));
     }
 
     /**
