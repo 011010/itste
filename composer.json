@@ -5,8 +5,9 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^7.3|^8.0|^8.1|^8.2|^8.3|^8.4",
         "barryvdh/laravel-dompdf": "^2.1",
+        "filament/filament": "^2.17",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "infyomlabs/laravel-ui-stisla": "^3.0",
@@ -14,14 +15,19 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravelcollective/html": "^6.2",
+        "maatwebsite/excel": "^3.1",
+        "pxlrbt/filament-excel": "^1.0",
+        "spatie/laravel-activitylog": "^4.0",
         "spatie/laravel-permission": "^4.3"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
+        "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
+        "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^9.3.3"
     },
     "autoload": {
